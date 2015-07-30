@@ -9,6 +9,11 @@ class SimpleGoogleCalendar {
 	}
 
 	function calendar_embed( $atts ) {
+
+		if ( is_feed() ) {
+			return wpautop( apply_filters( 'simplegooglecalendar_feed_notice', __( 'A Google calendar has been added to this post. Please visit the site directly to see it.', 'simple-google-calendar' ) ) );
+		}
+
 		$attributes = shortcode_atts( array(
 			'id'       => 'en.usa#holiday@group.v.calendar.google.com^#333333',
 			'timezone' => 'America/New_York',
@@ -43,7 +48,11 @@ class SimpleGoogleCalendar {
 	}
 
 	public function calendar_replace( $string ) {
-		 return str_replace( array( '&', '@', '#', ',', '^', '/' ), array( '&amp;', '%40', '%23', '&amp;src=', '&amp;color=', '%2F' ), $string );
+		return str_replace(
+		 	array( '&', '@', '#', ',', '^', '/' ),
+		 	array( '&amp;', '%40', '%23', '&amp;src=', '&amp;color=', '%2F' ),
+		 	$string
+		);
 	}
 
 	public function css() {
