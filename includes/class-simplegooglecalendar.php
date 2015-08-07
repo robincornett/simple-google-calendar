@@ -14,6 +14,7 @@ class SimpleGoogleCalendar {
 			'timezone' => 'America/New_York',
 			'mode'     => '',
 			'height'   => 600,
+			'tabs'     => 0,
 		), $atts );
 		foreach ( $attributes as $attribute => $id ) {
 			if ( 'id' === $attribute ) {
@@ -35,7 +36,8 @@ class SimpleGoogleCalendar {
 			$class  = 'desktop-calendar';
 			$mobile = 'mobile-calendar';
 		}
-		$calendar = '<div class="' . $class . '"><iframe src="https://www.google.com/calendar/embed?showTitle=0&amp;showTabs=0&amp;showTz=0&amp;' . $mode . 'height=' . $attributes['height'] . '&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;' . $attributes['id'] . 'ctz=' . $attributes['timezone'] . '" style=" border-width:0 " width="100%" height="' . $attributes['height'] . '" frameborder="0" scrolling="no"></iframe></div>';
+		$tabs = 'true' === $attributes['tabs'] ? 1 : 0;
+		$calendar = '<div class="' . $class . '"><iframe src="https://www.google.com/calendar/embed?showTitle=0&amp;showTabs=' . $tabs . '&amp;showTz=0&amp;' . $mode . 'height=' . $attributes['height'] . '&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;' . $attributes['id'] . 'ctz=' . $attributes['timezone'] . '" style=" border-width:0 " width="100%" height="' . $attributes['height'] . '" frameborder="0" scrolling="no"></iframe></div>';
 		if ( 'both' === $attributes['mode'] ) {
 			$calendar .= '<div class="' . $mobile . '"><iframe src="https://www.google.com/calendar/embed?showTitle=0&amp;showTabs=0&amp;showTz=0&amp;mode=AGENDA&amp;height=' . $attributes['height'] . '&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;' . $attributes['id'] . 'ctz=' . $attributes['timezone'] . '" style=" border-width:0 " width="100%" height="' . $attributes['height'] . '" frameborder="0" scrolling="no"></iframe></div>';
 		}
@@ -54,11 +56,12 @@ class SimpleGoogleCalendar {
 				.desktop-calendar { display: none; }
 				.mobile-calendar { display: block; }
 			}';
+		$css = apply_filters( 'simplegooglecalendar_inline_css', $css );
 		$css = str_replace( "\t", '', $css );
 		$css = str_replace( array( "\n", "\r" ), ' ', $css );
 
 		// Echo the CSS
-		printf( '<style type="text/css" media="screen">%s</style>', $css );
+		printf( '<style type="text/css" media="screen">%s</style>', esc_attr( $css ) );
 
 	}
 
