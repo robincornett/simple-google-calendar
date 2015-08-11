@@ -24,7 +24,7 @@
  */
 
 require plugin_dir_path( __FILE__ ) . 'includes/class-simplegooglecalendar.php';
-require plugin_dir_path( __FILE__ ) . 'includes/class-simplegooglecalendar-widget.php';
+require_once plugin_dir_path( __FILE__ ) . 'includes/class-simplegooglecalendar-widget.php';
 
 $simplegooglecalendar = new SimpleGoogleCalendar();
 $simplegooglecalendar->run();
