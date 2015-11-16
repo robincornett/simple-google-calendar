@@ -23,20 +23,8 @@
  * GitHub Branch:     master
  */
 
-function simplegooglecalendar_require() {
-	$files = array(
-		'class-simplegooglecalendar',
-		'class-simplegooglecalendar-settings',
-	);
-
-	foreach ( $files as $file ) {
-		require plugin_dir_path( __FILE__ ) . 'includes/' . $file . '.php';
-	}
-}
-simplegooglecalendar_require();
-
+require plugin_dir_path( __FILE__ ) . 'includes/class-simplegooglecalendar.php';
 require_once plugin_dir_path( __FILE__ ) . 'includes/class-simplegooglecalendar-widget.php';
 
-$simplegooglecalendar_settings = new SimpleGoogleCalendar_Settings();
-$simplegooglecalendar = new SimpleGoogleCalendar( $simplegooglecalendar_settings );
+$simplegooglecalendar = new SimpleGoogleCalendar();
 $simplegooglecalendar->run();

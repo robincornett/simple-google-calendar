@@ -2,14 +2,7 @@
 
 class SimpleGoogleCalendar {
 
-	protected $settings;
-
-	public function __construct( $settings ) {
-		$this->settings = $settings;
-	}
-
 	public function run() {
-		add_action( 'admin_menu', array( $this->settings, 'do_submenu_page' ) );
 		add_shortcode( 'simplegooglecalendar', array( $this, 'calendar_embed' ) );
 		add_action( 'wp_head', array( $this, 'css' ) );
 		add_action( 'widgets_init', array( $this, 'register_widget' ) );
@@ -84,4 +77,5 @@ class SimpleGoogleCalendar {
 	public function register_widget() {
 		register_widget( 'SimpleGoogleCalendar_Widget' );
 	}
+
 }
